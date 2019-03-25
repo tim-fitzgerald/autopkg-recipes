@@ -84,4 +84,4 @@ class Slacker(Processor):
 
 if __name__ == "__main__":
     processor = Slacker()
-processor.execute_shell()
+    processor.execute_shell()
