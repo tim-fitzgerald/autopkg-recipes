@@ -1,6 +1,6 @@
 #!/usr/bin/python
-#
-# Copyright 2019 Ben Reilly
+# 
+# Copyright 2019 Tim Fitzgerald
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# This script was taken more or less verbatim from Ben Reilly - but it had a typo that caused an error. I've fixed it but 
+# Bens original repo doesn't seem to be online anymore for me to make a PR. 
 
 from autopkglib import Processor, ProcessorError
 
