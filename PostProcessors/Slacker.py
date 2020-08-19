@@ -79,7 +79,7 @@ class Slacker(Processor):
                 slack_data = json.dumps({'text': slack_text, 'icon_url': AUTOPKGICON, 'username': USERNAME}).encode('utf-8')
                 headers = {'Content-Type': 'application/json'}
 
-                req = urllib.request.Request(url, slack_data, headers)
+                req = urllib.request.Request(webhook_url, slack_data, headers)
                 resp = urllib.request.urlopen(req)
                 response = resp.read()
                 if response.status_code != 200:
