@@ -22,7 +22,8 @@ from autopkglib import Processor, ProcessorError
 import subprocess
 import os.path
 import json
-import requests
+import urllib.request
+import urllib.parse
 
 # Set the webhook_url to the one provided by Slack when you create the webhook at https://my.slack.com/services/new/incoming-webhook/
 
@@ -74,10 +75,12 @@ class Slacker(Processor):
             catalog = self.env.get("munki_importer_summary_result")["data"]["catalogs"]
             if name:
                 slack_text = "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s\n*Pkg Path: *%s*\nPkginfo Path: *%s*" % (name, version, catalog, pkg_path, pkginfo_path)
-                slack_data = {'text': slack_text, 'icon_url': AUTOPKGICON, 'username': USERNAME}
+                slack_data = json.dumps({'text': slack_text, 'icon_url': AUTOPKGICON, 'username': USERNAME}).encode('utf-8')
+                headers = {'Content-Type': 'application/json'}
 
-                response = requests.post(
-                webhook_url, json=slack_data)
+                req = urllib.request.Request(url, slack_data, headers)
+                resp = urllib.request.urlopen(req)
+                response = resp.read()
                 if response.status_code != 200:
                     raise ValueError(
                                 'Request to slack returned an error %s, the response is:\n%s'
