@@ -75,7 +75,7 @@ class Slacker(URLGetter):
             catalog = self.env.get("munki_importer_summary_result")["data"]["catalogs"]
             if name:
                 slack_text = "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s\n*Pkg Path: *%s*\nPkginfo Path: *%s*" % (name, version, catalog, pkg_path, pkginfo_path)
-                slack_data = json.dumps{'text': slack_text, 'icon_url': AUTOPKGICON, 'username': USERNAME}
+                slack_data = json.dumps({'text': slack_text, 'icon_url': AUTOPKGICON, 'username': USERNAME})
                 headers = {
                     "Content-Type": "application/json"
                 }
@@ -90,7 +90,7 @@ class Slacker(URLGetter):
                     curl_cmd.extend(curl_opts)
                     print ("Curl command is:", curl_cmd)
                     response = self.download_with_curl(curl_cmd)
-                    
+
                 except:
                     raise ProcessorError("Failed to complete the post")  # noqa
 
