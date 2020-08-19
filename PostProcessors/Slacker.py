@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#!/usr/bin/python
 # 
 # Copyright 2019 Tim Fitzgerald
 #
