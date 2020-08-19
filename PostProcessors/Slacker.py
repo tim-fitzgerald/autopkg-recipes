@@ -18,19 +18,18 @@
 # This script was taken more or less verbatim from Ben Reilly - but it had a typo that caused an error. I've fixed it but 
 # Bens original repo doesn't seem to be online anymore for me to make a PR. 
 
-from autopkglib import Processor, ProcessorError
+from autopkglib import Processor, ProcessorError, URLGetter
 
 import subprocess
 import os.path
 import json
-import urllib.request
-import urllib.parse
+
 
 # Set the webhook_url to the one provided by Slack when you create the webhook at https://my.slack.com/services/new/incoming-webhook/
 
 __all__ = ["Slacker"]
 
-class Slacker(Processor):
+class Slacker(URLGetter):
     description = ("Posts to Slack via webhook based on output of a MunkiImporter. "
                     "Based on Graham Pugh's slacker.py - https://github.com/grahampugh/recipes/blob/master/PostProcessors/slacker.py"
                     "and "
@@ -76,17 +75,24 @@ class Slacker(Processor):
             catalog = self.env.get("munki_importer_summary_result")["data"]["catalogs"]
             if name:
                 slack_text = "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s\n*Pkg Path: *%s*\nPkginfo Path: *%s*" % (name, version, catalog, pkg_path, pkginfo_path)
-                slack_data = json.dumps({'text': slack_text, 'icon_url': AUTOPKGICON, 'username': USERNAME}).encode('utf-8')
-                headers = {'Content-Type': 'application/json'}
-
-                req = urllib.request.Request(webhook_url, slack_data, headers)
-                resp = urllib.request.urlopen(req)
-                response = resp.read()
-                if response.status_code != 200:
-                    raise ValueError(
-                                'Request to slack returned an error %s, the response is:\n%s'
-                                % (response.status_code, response.text)
-                                )
+                slack_data = json.dumps{'text': slack_text, 'icon_url': AUTOPKGICON, 'username': USERNAME}
+                headers = {
+                    "Content-Type": "application/json"
+                }
+                curl_opts = [
+                    "--request", "POST",
+                    "--data", slack_data,
+                    "{}".format(self.env.get("webhook_url"))
+                ]
+                try:
+                    curl_cmd = self.prepare_curl_cmd()
+                    self.add_curl_headers(curl_cmd, headers)
+                    curl_cmd.extend(curl_opts)
+                    print ("Curl command is:", curl_cmd)
+                    response = self.download_with_curl(curl_cmd)
+                    
+                except:
+                    raise ProcessorError("Failed to complete the post")  # noqa
 
 
 if __name__ == "__main__":
