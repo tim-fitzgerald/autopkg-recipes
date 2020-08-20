@@ -11,7 +11,7 @@
 	<key>Input</key>
 	<dict>
 		<key>DOWNLOAD_URL</key>
-		<string>https://downloadcallbar.talkdesk.com/Callbar-1.24.5-electron.dmg</string>
+		<string>https://downloadcallbar.talkdesk.com/Callbar-1.32.17-electron.dmg</string>
 		<key>NAME</key>
 		<string>Callbar</string>
 	</dict>
