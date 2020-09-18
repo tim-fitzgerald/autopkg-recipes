@@ -78,7 +78,7 @@ class Slacker(URLGetter):
             ]
             catalog = self.env.get("munki_importer_summary_result")["data"]["catalogs"]
             virus_total_result = self.env.get("virus_total_analyzer_summary_result")["data"]["ratio"]
-            virus_total_url = self.env.get("virus_total_analyzer_summary_result")["data"]["permalink"])
+            virus_total_url = self.env.get("virus_total_analyzer_summary_result")["data"]["permalink"]
             if name:
                 slack_text = (
                     "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s*\n*Pkg Path: *%s*\nPkginfo Path: *%s*\nVirusTotal Ratio: *%s*\nVirusTotal Link: *%s*"
