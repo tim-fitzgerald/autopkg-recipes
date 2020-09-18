@@ -61,6 +61,7 @@ class Slacker(URLGetter):
         was_imported = self.env.get("munki_repo_changed")
         munkiInfo = self.env.get("munki_info")
         webhook_url = self.env.get("webhook_url")
+        virus_total = self.env.get("virus_total_analyzer_result")
 
         # Slack Custom Settings
         ICONEMOJI = ":ghost:"
@@ -79,8 +80,8 @@ class Slacker(URLGetter):
             catalog = self.env.get("munki_importer_summary_result")["data"]["catalogs"]
             if name:
                 slack_text = (
-                    "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s*\n*Pkg Path: *%s*\nPkginfo Path: *%s*"
-                    % (name, version, catalog, pkg_path, pkginfo_path)
+                    "*New item added to repo:*\nTitle: *%s*\nVersion: *%s*\nCatalog: *%s*\n*Pkg Path: *%s*\nPkginfo Path: *%s*\nVirusTotal: *%s*"
+                    % (name, version, catalog, pkg_path, pkginfo_path, virus_total)
                 )
                 slack_data = json.dumps(
                     {"text": slack_text, "icon_url": AUTOPKGICON, "username": USERNAME}
