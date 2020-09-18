@@ -61,7 +61,7 @@ class Slacker(URLGetter):
         was_imported = self.env.get("munki_repo_changed")
         munkiInfo = self.env.get("munki_info")
         webhook_url = self.env.get("webhook_url")
-        virus_total = self.env.get("virus_total_analyzer_result")
+        virus_total = self.env.get("virus_total_analyzer_summary_result")
 
         # Slack Custom Settings
         ICONEMOJI = ":ghost:"
