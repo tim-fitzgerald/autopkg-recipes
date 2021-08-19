@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Created with Recipe Robot v1.1.2 (https://github.com/homebysix/recipe-robot)</string>
+	<string>Created with Recipe Robot v2.2.0 (https://github.com/homebysix/recipe-robot)</string>
 	<key>Description</key>
 	<string>Downloads the latest version of Karabiner-Elements and imports it into Munki.</string>
 	<key>Identifier</key>
@@ -13,25 +13,24 @@
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>karabinerelements</string>
+		<string>Karabiner-Elements</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
 			<array>
+				<string>Karabiner-MultitouchExtension.app</string>
+				<string>Karabiner-DriverKit-VirtualHIDDeviceClient.app</string>
+				<string>Karabiner-NotificationWindow.app</string>
 				<string>Karabiner-EventViewer.app</string>
 				<string>Karabiner-Menu.app</string>
 				<string>Karabiner-Elements.app</string>
-				<string>Karabiner-NotificationWindow.app</string>
-				<string>Autoupdate.app</string>
 			</array>
 			<key>catalogs</key>
 			<array>
-				<string>production</string>
+				<string>testing</string>
 			</array>
-			<key>category</key>
-			<string>Productivity</string>
 			<key>description</key>
-			<string>Karabiner-Elements is the subset of the next generation Karabiner for macOS Sierra.</string>
+			<string>Karabiner-Elements is a powerful utility for keyboard customization on macOS Sierra (10.12) or later.</string>
 			<key>developer</key>
 			<string>Fumihiko Takayama</string>
 			<key>display_name</key>
