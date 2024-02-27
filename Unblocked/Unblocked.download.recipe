@@ -26,7 +26,7 @@
 				<string>https://getunblocked.com/api/download/latest/hub</string>
 			</dict>
 			<key>Processor</key>
-			<string>URLDownloader</string>
+			<string>URLDownloaderPython</string>
 		</dict>
 		<dict>
 			<key>Processor</key>
